@@ -49,9 +49,9 @@ APP.NoteRouter = Backbone.Router.extend({
   },
 
   delete: function(id) {
-    // var note = this.collection.get(id);
-    // this.view = new APP.NoteDeleteView({ note: note });
-    // this.container.html(this.view.render().el);
+    var note = this.notes.get(id);
+    this.notes.remove(note);
+    window.location.hash = "notes";
   }
 
 });

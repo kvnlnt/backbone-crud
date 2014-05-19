@@ -22,7 +22,10 @@ APP.NoteCreateView = Backbone.View.extend({
   },
 
   showErrors: function(note, errors) {
-    console.log(note, errors);
+    var that = this;
+    _.each(errors, function(error){
+      that.container.prepend(error);
+    });
   },
 
   save: function(event) {
@@ -31,7 +34,7 @@ APP.NoteCreateView = Backbone.View.extend({
     event.preventDefault();
 
     // update our model with values from the form
-    this.note.set({ title: this.$el.find('#noteName').val() });
+    this.note.set({ title: this.$el.find('#noteName').val(), id: Math.floor(Math.random() * 100) + 1 });
 
     if (this.note.isValid()) {
       this.notes.add(this.note);

@@ -15,6 +15,10 @@ APP.NoteListView = Backbone.View.extend({
     this.notes.bind("reset", this.render, this);
   },
 
+  events:function(){
+
+  },
+
   // populate the html to the dom
   render: function () {
     // load template into container
