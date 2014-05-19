@@ -1,7 +1,5 @@
 // manage views in backbone
-function ViewManager(container) {
-
-  this.container = container;
+function ViewManager() {
 
   this.showView = function(view) {
 
