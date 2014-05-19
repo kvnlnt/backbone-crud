@@ -1,5 +1,11 @@
 // routers
-APP.notes = new APP.NoteRouter({ collection:new APP.NoteCollection() });
+APP.notes = new APP.NoteRouter({
+  notes: new APP.NoteCollection(),
+  viewManager: new ViewManager()
+});
 
- // now that everyting is setup we tell backbone to watch the urls
+
+APP.notes.notes.fetch({reset:true});
+
+// now that everyting is setup we tell backbone to watch the urls
 Backbone.history.start();

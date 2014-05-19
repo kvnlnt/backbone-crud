@@ -5,6 +5,7 @@ APP.NoteRouter = Backbone.Router.extend({
 
   routes: {
 
+    "": "list",
     "notes": "list",
     "note/new": "create",
     "note/:id/view": "read",
@@ -14,47 +15,43 @@ APP.NoteRouter = Backbone.Router.extend({
   },
 
   initialize: function(options) {
-    this.collection = options.collection;
-    this.container = $("#notes");
-    this.list();
+    this.notes = options.notes;
+    this.viewManager = options.viewManager;
   },
 
   list: function() {
-    this.view = new APP.NoteListView({
-      collection: this.collection
+    var view = new APP.NoteListView({
+      notes: this.notes,
+      container: $("#notes")
     });
-    this.view.render(this.container);
+    this.viewManager.showView(view);
   },
 
   create: function() {
-    this.view = new APP.NoteCreateView({
-      note: new APP.NoteModel()
+    var view = new APP.NoteCreateView({
+      note: new APP.NoteModel(),
+      notes: this.notes,
+      container: $("#notes")
     });
-    this.container.html(this.view.render().el);
+    this.viewManager.showView(view);
   },
 
   read: function(id) {
-    var note = this.collection.get(id);
-    this.view = new APP.NoteReadView({
-      note: note
-    });
-    this.container.html(this.view.render().el);
+    // var note = this.collection.get(id);
+    // this.view = new APP.NoteReadView({ note: note });
+    // this.container.html(this.view.render().el);
   },
 
   update: function(id) {
-    var note = this.collection.get(id);
-    this.view = new APP.NoteUpdateView({
-      note: note
-    });
-    this.container.html(this.view.render().el);
+    // var note = this.collection.get(id);
+    // this.view = new APP.NoteUpdateView({ note: note });
+    // this.container.html(this.view.render().el);
   },
 
   delete: function(id) {
-    var note = this.collection.get(id);
-    this.view = new APP.NoteDeleteView({
-      note: note
-    });
-    this.container.html(this.view.render().el);
+    // var note = this.collection.get(id);
+    // this.view = new APP.NoteDeleteView({ note: note });
+    // this.container.html(this.view.render().el);
   }
 
 });

@@ -1,4 +1,4 @@
-window.loadTemplate = function(template, container, json) {
+window.loadTemplate = function(template, el, container, json) {
   var url = template;
   $.ajax({
     url: url,
@@ -7,7 +7,8 @@ window.loadTemplate = function(template, container, json) {
     dataType: 'html',
     success: function(data) {
       var compiled = _.template(data, json);
-      container.html(compiled);
+      el.html(compiled);
+      container.html(el);
     }
   });
 }
