@@ -8,6 +8,11 @@ APP.NoteListView = Backbone.View.extend({
   // template
   template:'app/templates/list.html',
 
+  // dom elements used
+  els:{
+    test:'.test'
+  },
+
   // the constructor
   initialize: function (options) {
     this.notes = options.notes;
@@ -15,8 +20,19 @@ APP.NoteListView = Backbone.View.extend({
     this.notes.bind("reset", this.render, this);
   },
 
+  // event handlers for dynamically rendered html
   events:function(){
+    this.container.on('click',this.els.test,this.test);
+  },
+  
+  test:function(e){
+    console.log(e.target);
+  },
 
+  // onclose event is automatically called on view change
+  // use to remove dynamically bound events
+  onClose:function(){
+    this.container.unbind();
   },
 
   // populate the html to the dom

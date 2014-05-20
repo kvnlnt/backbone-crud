@@ -43,7 +43,6 @@ APP.NoteCreateView = Backbone.View.extend({
 
   },
 
-
   // populate the html to the dom
   render: function() {
     // load template into container

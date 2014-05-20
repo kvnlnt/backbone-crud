@@ -1,7 +1,6 @@
 window.loadTemplate = function(template, el, container, json) {
-  var url = template;
   $.ajax({
-    url: url,
+    url: template,
     method: 'GET',
     async: false,
     dataType: 'html',
