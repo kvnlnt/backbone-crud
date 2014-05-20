@@ -3,55 +3,98 @@ window.APP = window.APP || {};
 
 APP.NoteRouter = Backbone.Router.extend({
 
-  routes: {
+    routes: {
 
-    "": "list",
-    "notes": "list",
-    "note/new": "create",
-    "note/:id/view": "read",
-    "note/:id/edit": "update",
-    "note/:id/delete": "delete",
+        "": "list",
+        "notes": "list",
+        "note/new": "create",
+        "note/:id/view": "read",
+        "note/:id/edit": "update",
+        "note/:id/delete": "delete",
 
-  },
+    },
 
-  initialize: function(options) {
-    this.notes = options.notes;
-    this.viewManager = options.viewManager;
-  },
+    // setup router
+    initialize: function(options) {
 
-  list: function() {
-    var view = new APP.NoteListView({
-      notes: this.notes,
-      container: $("#notes")
-    });
-    this.viewManager.showView(view);
-  },
+        // get all notes
+        this.notes = options.notes;
 
-  create: function() {
-    var view = new APP.NoteCreateView({
-      note: new APP.NoteModel(),
-      notes: this.notes,
-      container: $("#notes")
-    });
-    this.viewManager.showView(view);
-  },
+        // assign view manager object
+        this.viewManager = options.viewManager;
 
-  read: function(id) {
-    // var note = this.collection.get(id);
-    // this.view = new APP.NoteReadView({ note: note });
-    // this.container.html(this.view.render().el);
-  },
+    },
 
-  update: function(id) {
-    // var note = this.collection.get(id);
-    // this.view = new APP.NoteUpdateView({ note: note });
-    // this.container.html(this.view.render().el);
-  },
+    // list records
+    list: function() {
 
-  delete: function(id) {
-    var note = this.notes.get(id);
-    this.notes.remove(note);
-    window.location.hash = "notes";
-  }
+        // get view
+        var view = new APP.NoteListView({
+            notes: this.notes,
+            container: $("#notes")
+        });
+
+        // show view
+        this.viewManager.showView(view);
+    },
+
+    // create new record
+    create: function() {
+
+        // create new object
+        var view = new APP.NoteCreateView({
+            note: new APP.NoteModel(),
+            notes: this.notes,
+            container: $("#notes")
+        });
+
+        // show view
+        this.viewManager.showView(view);
+
+    },
+
+    // read record
+    read: function(id) {
+
+        // get note
+        var note = this.notes.get(id);
+
+        // if not found, redirect home
+        var inValid = note === void 0;
+        if (inValid) {
+            window.location.hash = "notes";
+            return;
+        }
+
+        // get view
+        var view = new APP.NoteReadView({
+            note: note,
+            container: $("#notes")
+        });
+
+        // show view
+        this.viewManager.showView(view);
+
+    },
+
+    // update record
+    update: function(id) {
+        // var note = this.collection.get(id);
+        // this.view = new APP.NoteUpdateView({ note: note });
+        // this.container.html(this.view.render().el);
+    },
+
+    // delete record
+    delete: function(id) {
+
+        // get note
+        var note = this.notes.get(id);
+
+        // delete it
+        this.notes.remove(note);
+
+        // redirect
+        window.location.hash = "notes";
+    }
 
 });

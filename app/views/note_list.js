@@ -22,13 +22,9 @@ APP.NoteListView = Backbone.View.extend({
 
   // event handlers for dynamically rendered html
   events:function(){
-    this.container.on('click',this.els.test,this.test);
+    // this.container.on('click',this.els.test,this.test);
   },
   
-  test:function(e){
-    console.log(e.target);
-  },
-
   // onclose event is automatically called on view change
   // use to remove dynamically bound events
   onClose:function(){
