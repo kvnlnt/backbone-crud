@@ -5,7 +5,7 @@ APP.NoteUpdateView = Backbone.View.extend({
     tagName: "div",
 
     // template
-    template: 'app/templates/update.html',
+    template: _.template($("#template-update").html()),
 
     // the constructor
     initialize: function(options) {
@@ -35,12 +35,11 @@ APP.NoteUpdateView = Backbone.View.extend({
 
         // update our model with values from the form
         this.note.set({
-            title: this.$el.find('#noteName').val(),
-            id: Math.floor(Math.random() * 100) + 1
+            title: this.$el.find('#noteName').val()
         });
 
         if (this.note.isValid()) {
-            this.notes.add(this.note);
+            this.note.save();
             window.location.hash = "notes";
         }
 
@@ -49,21 +48,10 @@ APP.NoteUpdateView = Backbone.View.extend({
     // populate the html to the dom
     render: function() {
 
-        $.ajax({
-            url: this.template,
-            context: this,
-            method: 'GET',
-            dataType: 'html',
-            success: this.renderTemplate
-        });
-
-    },
-
-    // handle template rendering
-    renderTemplate: function(template) {
-        var compiled = _.template(template, {});
+        var compiled = this.template({ note:this.note });
         this.$el.html(compiled);
         this.container.html(this.el);
+
     }
 
 });

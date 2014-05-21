@@ -6,9 +6,9 @@
 
     <!-- LIBS -->
 
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+      <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+      <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
 
 </head>
 
@@ -16,12 +16,16 @@
 
     <div class="container">
 
+      <!-- HTML -->
+
+        <!-- menu -->
         <a href="#/notes">List</a>
         <a href="#/note/new">New</a>
 
+        <!-- app container -->
         <div id="notes"></div>
 
-        <!-- TEMPLATES -->
+      <!-- TEMPLATES -->
 
         <!-- list -->
         <script type="text/html" id="template-list">
@@ -44,7 +48,7 @@
           <form id="noteForm">
           <label for="noteName">Name</label>
           <input type="text" id="noteName">
-          <button type="button" id="noteFormSubmit">Add</button>
+          <button type="button" id="noteFormSubmit">Save</button>
           </form>
         </script>
 
@@ -59,8 +63,8 @@
           <h2>Edit</h2>
           <form id="noteForm">
           <label for="noteName">Name</label>
-          <input type="text" id="noteName">
-          <button type="button" id="noteFormSubmit">Add</button>
+          <input type="text" id="noteName" value="<%= note.get('title') %>">
+          <button type="button" id="noteFormSubmit">Save</button>
           </form>
         </script>
 
@@ -68,24 +72,24 @@
 
     <!-- SCRIPTS -->
 
-    <!-- helpers -->
-    <script type="text/javascript" src="app/helpers/view_manager.js"></script>
+      <!-- helpers -->
+      <script type="text/javascript" src="app/helpers/view_manager.js"></script>
 
-    <!-- routes -->
-    <script type="text/javascript" src="app/routers/note.js"></script>
+      <!-- routes -->
+      <script type="text/javascript" src="app/routers/note.js"></script>
 
-    <!-- views -->
-    <script type="text/javascript" src="app/views/note_list.js"></script>
-    <script type="text/javascript" src="app/views/note_create.js"></script>
-    <script type="text/javascript" src="app/views/note_read.js"></script>
-    <script type="text/javascript" src="app/views/note_update.js"></script>
+      <!-- views -->
+      <script type="text/javascript" src="app/views/note_list.js"></script>
+      <script type="text/javascript" src="app/views/note_create.js"></script>
+      <script type="text/javascript" src="app/views/note_read.js"></script>
+      <script type="text/javascript" src="app/views/note_update.js"></script>
 
-    <!-- models & collections -->
-    <script type="text/javascript" src="app/models/note.js"></script>
-    <script type="text/javascript" src="app/collections/notes.js"></script>
+      <!-- models & collections -->
+      <script type="text/javascript" src="app/models/note.js"></script>
+      <script type="text/javascript" src="app/collections/notes.js"></script>
 
-    <!-- kick off the app -->
-    <script type="text/javascript" src="app/app.js"></script>
+      <!-- kick off the app -->
+      <script type="text/javascript" src="app/app.js"></script>
 
 </body>
 
