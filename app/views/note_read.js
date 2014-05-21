@@ -1,24 +1,27 @@
 "use strict";
 APP.NoteReadView = Backbone.View.extend({
 
-  // name of the parent
-  tagName:"div",
+    // name of the parent
+    tagName: "div",
 
-  // template
-  template: 'app/templates/read.html',
+    // template
+    template: _.template($("#template-read").html()),
 
-  // the constructor
-  initialize: function(options) {
-    this.note = options.note;
-    this.container = options.container;
-  },
+    // the constructor
+    initialize: function(options) {
+        this.note = options.note;
+        this.container = options.container;
+    },
 
-  events: {},
+    events: {},
 
-  // populate the html to the dom
-  render: function() {
-    // load template into container
-    loadTemplate(this.template, this.$el, this.container, { note:this.note });
-  }
+    // populate the html to the dom
+    render: function() {
+
+        var compiled = this.template({ note: this.note });
+        this.$el.html(compiled);
+        this.container.html(this.el);
+
+    }
 
 });

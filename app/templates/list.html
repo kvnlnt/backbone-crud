@@ -1,9 +1,0 @@
-<h2>List</h2>
-<ul id="notesList">
-  <% for(note in notes) { %>
-  <li>
-  	<%= notes[note].title %>
-  	<a href="#note/<%= notes[note].id %>/view">view</a> 
-  	<a href="#note/<%= notes[note].id %>/delete">remove</a></li>
-  <% } %>
-</ul>

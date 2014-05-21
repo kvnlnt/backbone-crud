@@ -79,9 +79,19 @@ APP.NoteRouter = Backbone.Router.extend({
 
     // update record
     update: function(id) {
-        // var note = this.collection.get(id);
-        // this.view = new APP.NoteUpdateView({ note: note });
-        // this.container.html(this.view.render().el);
+
+        // get note object by id
+        var note = this.notes.get(id);
+
+        // create new object
+        var view = new APP.NoteUpdateView({
+            note: note,
+            notes: this.notes,
+            container: $("#notes")
+        });
+
+        // show view
+        this.viewManager.showView(view);
     },
 
     // delete record

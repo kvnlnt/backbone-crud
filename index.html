@@ -2,17 +2,73 @@
 <html>
 
 <head>
-  <title>Backbone CRUD</title>
-  <!-- LIBS -->
+    <title>Backbone CRUD</title>
+
+    <!-- LIBS -->
 
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
 
-  <!-- SCRIPTS -->
+</head>
+
+<body>
+
+    <div class="container">
+
+        <a href="#/notes">List</a>
+        <a href="#/note/new">New</a>
+
+        <div id="notes"></div>
+
+        <!-- TEMPLATES -->
+
+        <!-- list -->
+        <script type="text/html" id="template-list">
+          <h2> List </h2>
+          <ul id="notesList">
+          <% for(note in notes) { %>
+          <li>
+          <%= notes[note].title %>
+          <a href="#note/<%= notes[note].id %>/view">view</a >
+          <a href="#note/<%= notes[note].id %>/edit">edit</a> 
+          <a href="#note/<%= notes[note].id %>/delete">remove</a > 
+          </li>
+          <% } %>
+          </ul>
+        </script>
+
+        <!-- create -->
+        <script type="text/html" id="template-create">
+          <h2>New</h2>
+          <form id="noteForm">
+          <label for="noteName">Name</label>
+          <input type="text" id="noteName">
+          <button type="button" id="noteFormSubmit">Add</button>
+          </form>
+        </script>
+
+        <!-- read -->
+        <script type="text/html" id="template-read">
+          <h2>Read</h2>
+          Title: <%= note.get('title') %>
+        </script>
+
+        <!-- update -->
+        <script type="text/html" id="template-update">
+          <h2>Edit</h2>
+          <form id="noteForm">
+          <label for="noteName">Name</label>
+          <input type="text" id="noteName">
+          <button type="button" id="noteFormSubmit">Add</button>
+          </form>
+        </script>
+
+    </div>
+
+    <!-- SCRIPTS -->
 
     <!-- helpers -->
-    <script type="text/javascript" src="app/helpers/load_template.js"></script>
     <script type="text/javascript" src="app/helpers/view_manager.js"></script>
 
     <!-- routes -->
@@ -23,96 +79,13 @@
     <script type="text/javascript" src="app/views/note_create.js"></script>
     <script type="text/javascript" src="app/views/note_read.js"></script>
     <script type="text/javascript" src="app/views/note_update.js"></script>
-    <script type="text/javascript" src="app/views/note_delete.js"></script>
 
     <!-- models & collections -->
     <script type="text/javascript" src="app/models/note.js"></script>
     <script type="text/javascript" src="app/collections/notes.js"></script>
 
-</head>
-
-<body>
-
-  <div class="container">
-
-    <a href="#/notes">List</a>
-    <a href="#/note/new">New</a>
-
-    <div id="notes"></div>
-
-  </div>
-
-  <!-- kick off the app -->
-  <script type="text/javascript" src="app/app.js"></script>
-
-  <ul id="features">
-    <li>
-      Architecture
-      <ul>
-        <li>Routing</li>
-        <li>Data Modeling</li>
-        <li>Views</li>
-        <li>Collections</li>
-        <li>Decomposed file structure</li>
-        <li>Isolated business logic (using filters, helpers, etc.)</li>
-      </ul>
-    </li>
-    <li>UX
-      <ul>
-        <li>Messaging</li>
-        <li>Timeouts</li>
-        <li>Security</li>
-        <li>Graceful degredation</li>
-        <li>Progressive Enhancment</li>
-        <li>Error Handling (HTTP vs. APP)</li>
-        <li>Configurable</li>
-        <li>Verification (deletes)</li>
-      </ul>
-    </li>
-    <li>
-      Data
-      <ul>
-        <li>API compatible</li>
-        <li>API aggregation</li>
-        <li>Local Storage</li>
-      </ul>
-    </li>
-    <li>Testing
-      <ul>
-        <li>Jasmine Unit</li>
-        <li>Integration Friendly</li>
-        <li>A/B (dev/prod/etc)</li>
-      </ul>
-    </li>
-    <li>
-      Forms
-      <ul>
-        <li>Validation</li>
-        <li>Masking</li>
-        <li>Bootstrap fields</li>
-        <li>Kendo UI widgets</li>
-      </ul>
-    </li>
-    <li>Templating
-      <ul>
-        <li>Ajax loaded</li>
-        <li>script/template based</li>
-      </ul>
-    </li>
-    <li>
-      Debugging
-      <ul>
-        <li>Console friendly (APP is global object)</li>
-      </ul>
-    </li>
-    <li>
-      Automation
-      <ul>
-        <li>Yeoman/Scaffolding friendly</li>
-        <li>Compilation sanity</li>
-      </ul>
-    </li>
-  </ul>
+    <!-- kick off the app -->
+    <script type="text/javascript" src="app/app.js"></script>
 
 </body>
 

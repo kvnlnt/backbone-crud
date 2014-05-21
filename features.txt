@@ -1,0 +1,68 @@
+<ul id="features">
+        <li>
+            Architecture
+            <ul>
+                <li>Routing</li>
+                <li>Data Modeling</li>
+                <li>Views</li>
+                <li>Collections</li>
+                <li>Decomposed file structure</li>
+                <li>Isolated business logic (using filters, helpers, etc.)</li>
+            </ul>
+        </li>
+        <li>UX
+            <ul>
+                <li>Messaging</li>
+                <li>Timeouts</li>
+                <li>Security</li>
+                <li>Graceful degredation</li>
+                <li>Progressive Enhancment</li>
+                <li>Error Handling (HTTP vs. APP)</li>
+                <li>Configurable</li>
+                <li>Verification (deletes)</li>
+            </ul>
+        </li>
+        <li>
+            Data
+            <ul>
+                <li>API compatible</li>
+                <li>API aggregation</li>
+                <li>Local Storage</li>
+            </ul>
+        </li>
+        <li>Testing
+            <ul>
+                <li>Jasmine Unit</li>
+                <li>Integration Friendly</li>
+                <li>A/B (dev/prod/etc)</li>
+            </ul>
+        </li>
+        <li>
+            Forms
+            <ul>
+                <li>Validation</li>
+                <li>Masking</li>
+                <li>Bootstrap fields</li>
+                <li>Kendo UI widgets</li>
+            </ul>
+        </li>
+        <li>Templating
+            <ul>
+                <li>Ajax loaded</li>
+                <li>script/template based</li>
+            </ul>
+        </li>
+        <li>
+            Debugging
+            <ul>
+                <li>Console friendly (APP is global object)</li>
+            </ul>
+        </li>
+        <li>
+            Automation
+            <ul>
+                <li>Yeoman/Scaffolding friendly</li>
+                <li>Compilation sanity</li>
+            </ul>
+        </li>
+    </ul>
