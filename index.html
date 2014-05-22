@@ -10,6 +10,10 @@
       <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
       <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
 
+    <!-- STYLES -->
+
+    <link rel="stylesheet" type="text/css" href="styles/app.css"/>
+
 </head>
 
 <body>
@@ -18,10 +22,6 @@
 
       <!-- HTML -->
 
-        <!-- menu -->
-        <a href="#/notes">List</a>
-        <a href="#/note/new">New</a>
-
         <!-- app container -->
         <div id="notes"></div>
 
@@ -29,6 +29,7 @@
 
         <!-- list -->
         <script type="text/html" id="template-list">
+          <a href="#/note/new">New</a>
           <h2> List </h2>
           <ul id="notesList">
           <% for(note in notes) { %>
@@ -44,6 +45,7 @@
 
         <!-- create -->
         <script type="text/html" id="template-create">
+          <a href="#">back</a>
           <h2>New</h2>
           <form id="noteForm">
           <label for="noteName">Name</label>
@@ -54,12 +56,14 @@
 
         <!-- read -->
         <script type="text/html" id="template-read">
+          <a href="#">back</a>
           <h2>Read</h2>
           Title: <%= note.get('title') %>
         </script>
 
         <!-- update -->
         <script type="text/html" id="template-update">
+          <a href="#">back</a>
           <h2>Edit</h2>
           <form id="noteForm">
           <label for="noteName">Name</label>
@@ -79,6 +83,7 @@
       <script type="text/javascript" src="app/routers/note.js"></script>
 
       <!-- views -->
+      <script type="text/javascript" src="app/views/404.js"></script>
       <script type="text/javascript" src="app/views/note_list.js"></script>
       <script type="text/javascript" src="app/views/note_create.js"></script>
       <script type="text/javascript" src="app/views/note_read.js"></script>

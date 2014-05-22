@@ -24,50 +24,84 @@ APP.NoteRouter = Backbone.Router.extend({
         this.viewManager = options.viewManager;
 
         // reload views that need the notes collection
-        this.notes.bind("reset", this.reset, this);
+        this.notes.bind("reset", this.refresh, this);
 
     },
 
     // reload current view
-    reset:function() {
+    refresh:function() {
 
-        this.refresh();
+        var _tmp = Backbone.history.fragment;
+        this.navigate( _tmp + (new Date).getTime() );
+        this.navigate( _tmp, { trigger:true } );
 
     },
 
     // list records
     list: function() {
 
-        // get view
-        var view = new APP.NoteListView({
-            notes: this.notes,
-            container: $("#notes")
-        });
+        // rendering flags
+        var collectionLoaded = this.notes.length > 0;
+        var isValid = collectionLoaded;
 
-        // show view
-        this.viewManager.showView(view);
+        // check if notes are loaded
+        if(isValid){
+
+            // get view
+            var view = new APP.NoteListView({
+                notes: this.notes,
+                container: $("#notes")
+            });
+
+            // show view
+            this.viewManager.showView(view);
+
+        } else {
+
+            this.error('no');
+
+        }
+
     },
 
     // create new record
     create: function() {
 
-        // create new object
-        var view = new APP.NoteCreateView({
-            note: new APP.NoteModel(),
-            notes: this.notes,
-            container: $("#notes")
-        });
+        // rendering flags
+        var collectionLoaded = this.notes.length > 0;
+        var isValid = collectionLoaded;
 
-        // show view
-        this.viewManager.showView(view);
+        // check if notes are loaded
+        if(isValid){
+
+            // create new object
+            var view = new APP.NoteCreateView({
+                note: new APP.NoteModel(),
+                notes: this.notes,
+                container: $("#notes")
+            });
+
+            // show view
+            this.viewManager.showView(view);
+
+        } else {
+
+            this.error('no');
+
+        }
 
     },
 
     // read record
     read: function(id) {
 
+        // rendering flags
+        var collectionLoaded = this.notes.length > 0;
+        var modelFound = this.notes.get(id) !== void 0;
+        var isValid = collectionLoaded && modelFound;
+
         // check if notes are loaded
-        if(this.notes.length > 0){
+        if(isValid){
 
             // get note
             var note = this.notes.get(id);
@@ -81,6 +115,10 @@ APP.NoteRouter = Backbone.Router.extend({
             // show view
             this.viewManager.showView(view);
 
+        } else {
+
+            this.error('no');
+
         }
 
     },
@@ -88,8 +126,13 @@ APP.NoteRouter = Backbone.Router.extend({
     // update record
     update: function(id) {
 
+        // rendering flags
+        var collectionLoaded = this.notes.length > 0;
+        var modelFound = this.notes.get(id) !== void 0;
+        var isValid = collectionLoaded && modelFound;
+
         // check if notes are loaded
-        if(this.notes.length > 0){
+        if(isValid){
 
             // get note object by id
             var note = this.notes.get(id);
@@ -104,6 +147,10 @@ APP.NoteRouter = Backbone.Router.extend({
             // show view
             this.viewManager.showView(view);
 
+        } else {
+
+            this.error('no');
+
         }
         
     },
@@ -111,25 +158,45 @@ APP.NoteRouter = Backbone.Router.extend({
     // delete record
     delete: function(id) {
 
-        // get note
-        var note = this.notes.get(id);
+        // rendering flags
+        var collectionLoaded = this.notes.length > 0;
+        var modelFound = this.notes.get(id) !== void 0;
+        var isValid = collectionLoaded && modelFound;
 
-        // delete it
-        this.notes.remove(note);
+        // check if notes are loaded
+        if(isValid){
 
-        // redirect
-        window.location.hash = "notes";
-    }
+            // get note
+            var note = this.notes.get(id);
 
-});
+            // remove from collection
+            this.notes.remove(note);
 
-// Router refresher
-_.extend(Backbone.Router.prototype,{
+            // destroy the object
+            // note.destroy();
 
-    refresh: function() {
-        var _tmp = Backbone.history.fragment;
-        this.navigate( _tmp + (new Date).getTime() );
-        this.navigate( _tmp, { trigger:true } );
+            // redirect
+            window.location.hash = "notes";
+
+        } else {
+
+            this.error('no');
+
+        }
+    },
+
+    // 404 error
+    error:function(msg){
+
+        // get view
+        var view = new APP.errorView({
+            msg:msg,
+            container: $("#notes")
+        });
+
+        // show view
+        this.viewManager.showView(view);
+
     }
 
 });

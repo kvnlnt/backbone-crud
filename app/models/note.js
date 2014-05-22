@@ -7,12 +7,16 @@ APP.NoteModel = Backbone.Model.extend({
   },
 
   validate: function (attrs) {
-    var errors = {};
-    if (!attrs.title) errors.title = "Hey! Give this thing a title.";
 
-    if (!_.isEmpty(errors)) {
-      return errors;
-    }
+    // errors object
+    var errors = {};
+
+    // validations
+    if (!attrs.title) errors.title = "Please provide a title";
+
+    // return errors
+    return !_.isEmpty(errors) ? errors : false;
+    
   }
 
 });

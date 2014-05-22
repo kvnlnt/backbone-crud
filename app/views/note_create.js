@@ -21,11 +21,23 @@ APP.NoteCreateView = Backbone.View.extend({
 
     },
 
-    showErrors: function(note, errors) {
+    showErrors: function(ibeacon, errors) {
+
         var that = this;
+
+        // remove current errors
+        that.container.find('.errors').remove();
+
+        // create new error container
+        var html = $("<ul>");
+            html.addClass("errors");
+
+        // loop and attach each error
         _.each(errors, function(error) {
-            that.container.prepend(error);
+            html.append('<li>'+error+'</li>');
         });
+
+        that.container.find('h2').after(html);
     },
 
     save: function(event) {

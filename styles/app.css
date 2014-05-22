@@ -1,0 +1,9 @@
+
+.errors {
+	background-color:#F5DCDC;
+	padding:1rem;
+}
+
+.errors li {
+	margin-left:1rem;
+}
